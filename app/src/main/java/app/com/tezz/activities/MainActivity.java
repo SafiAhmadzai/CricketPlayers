@@ -15,17 +15,19 @@ import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import app.com.tezz.R;
+import app.com.tezz.application.Application;
+import app.com.tezz.receivers.ConnectivityReceiver;
 import app.com.tezz.utilities.SessionManager;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListerener {
 
 
     SessionManager sessionManager;
 
     Animation animation;
-    TextView tvAnimation;
 
 
     @Override
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        tvAnimation=findViewById(R.id.textView2);
+
 
 
         animation= AnimationUtils.loadAnimation(MainActivity.this,R.anim.fade_in);
@@ -51,8 +53,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //sessionManager.setHighScore(25);
 
-                tvAnimation.setVisibility(View.VISIBLE);
-               tvAnimation.setAnimation(animation);
+
+                boolean  isConnected=ConnectivityReceiver.isConnected();
+
+
+                Toast.makeText(MainActivity.this, ""+isConnected, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -84,5 +90,15 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Application.getInstance().setConnectivityListener(MainActivity.this);
+    }
 
+    @Override
+    public void networkConnectionChanged(boolean isConnected) {
+
+        Toast.makeText(this, ""+isConnected, Toast.LENGTH_SHORT).show();
+    }
 }
