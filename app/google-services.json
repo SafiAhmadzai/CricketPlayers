@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "747567385848",
+    "firebase_url": "https://tezz-4fd5d.firebaseio.com",
+    "project_id": "tezz-4fd5d",
+    "storage_bucket": "tezz-4fd5d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747567385848:android:fad3519ab0bbd751697f0d",
+        "android_client_info": {
+          "package_name": "app.com.tezz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747567385848-alnlj4t59o4fdpttdl6t84amhvjnhv68.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBL_8ZIbOc4UKtcaeAYq8BAj9Yjfn4IXEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747567385848-alnlj4t59o4fdpttdl6t84amhvjnhv68.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
