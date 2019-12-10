@@ -15,10 +15,12 @@ public class SessionManager {
 
     private static final String  IS_ONBOARDINGSHOWN="isONboardingshow";
     private  static final String HIFH_SCORE="highscore_user";
+    private static  final String FIRST_VISIT="first_visit";
+
+
 
     public SessionManager(Context context) {
         this.context = context;
-
         pref=context.getSharedPreferences(NAME_PREFERENCE,PRIVATE_MODE);
         editor=pref.edit();
 
@@ -26,7 +28,6 @@ public class SessionManager {
 
 
     public void  setHighScore(int higNumber){
-
         editor.putInt(HIFH_SCORE,higNumber);
         editor.commit();
     }
@@ -37,7 +38,6 @@ public class SessionManager {
     }
 
 
-
     public void setIsOnboardingshown(boolean isFirstTime){
 
         editor.putBoolean(IS_ONBOARDINGSHOWN,isFirstTime);
@@ -45,14 +45,24 @@ public class SessionManager {
 
     }
 
-
-
-
     public  boolean getIsOnboardingshown() {
 
         return pref.getBoolean(IS_ONBOARDINGSHOWN,true
         );
     }
+
+
+    public void  setFirstVisit(boolean isFirstVisit){
+        editor.putBoolean(FIRST_VISIT,isFirstVisit);
+        editor.commit();
+    }
+
+
+    public boolean getFirstVisit(){
+
+        return pref.getBoolean(FIRST_VISIT,false);
+    }
+
 
 
 
