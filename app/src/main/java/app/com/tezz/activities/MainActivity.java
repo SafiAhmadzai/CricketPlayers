@@ -2,6 +2,12 @@ package app.com.tezz.activities;
 
 import android.os.Bundle;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -20,16 +26,21 @@ import android.widget.Toast;
 import app.com.tezz.R;
 import app.com.tezz.application.Application;
 import app.com.tezz.receivers.ConnectivityReceiver;
+import app.com.tezz.receivers.VolleySingleton;
 import app.com.tezz.utilities.SessionManager;
 
 public class MainActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListerener {
 
 
     SessionManager sessionManager;
+    TextView textView;
 
     Animation animation;
 
+    VolleySingleton singleton;
+    RequestQueue queue;
 
+    Application myApp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,16 +50,42 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
         setSupportActionBar(toolbar);
 
 
+        myApp = Application.getInstance();
+        singleton = VolleySingleton.getInstance();
+        queue = singleton.getRequestQueue();
+
         if (getIntent().getStringExtra("key")!=null){
 
 
             ///SHow tutorial
         }
 
+        textView=findViewById(R.id.tvShowNetworkData);
 
 
         animation= AnimationUtils.loadAnimation(MainActivity.this,R.anim.fade_in);
 
+
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://www.google.com";
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        textView.setText("Response is: "+ response.substring(0,500));
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                textView.setText("That didn't work!");
+            }
+        });
+
+        queue.add(stringRequest);
 
 
 
