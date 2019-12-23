@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="app.com.tezz">
-<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <dist:module dist:instant="true" />
 
@@ -14,27 +15,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.RegisterPage" android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".activities.OnBoardingFlowActivity">
+        <activity android:name=".activities.ActivityWeb">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.RegisterPage"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.OnBoardingFlowActivity">
 
+        </activity>
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
-
-        <receiver android:name=".receivers.ConnectivityReceiver" android:enabled="true">
-            <intent-filter >
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"></action>
-
+        <receiver
+            android:name=".receivers.ConnectivityReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
-
         </receiver>
     </application>
 

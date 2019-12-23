@@ -1,4 +1,4 @@
-package app.com.tezz.receivers;
+package app.com.tezz.network;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;
@@ -10,6 +10,8 @@ import com.android.volley.toolbox.Volley;
 import app.com.tezz.application.Application;
 
 public class VolleySingleton {
+
+
     private static VolleySingleton sInstance = null;
     private ImageLoader mImageLoader;
     private RequestQueue mRequestQueue;

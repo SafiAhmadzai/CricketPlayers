@@ -9,7 +9,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -26,7 +25,6 @@ import android.widget.Toast;
 import app.com.tezz.R;
 import app.com.tezz.application.Application;
 import app.com.tezz.receivers.ConnectivityReceiver;
-import app.com.tezz.receivers.VolleySingleton;
 import app.com.tezz.utilities.SessionManager;
 
 public class MainActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListerener {
@@ -37,10 +35,6 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
 
     Animation animation;
 
-    VolleySingleton singleton;
-    RequestQueue queue;
-
-    Application myApp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +44,7 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
         setSupportActionBar(toolbar);
 
 
-        myApp = Application.getInstance();
-        singleton = VolleySingleton.getInstance();
-        queue = singleton.getRequestQueue();
+
 
         if (getIntent().getStringExtra("key")!=null){
 
@@ -65,12 +57,11 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
 
         animation= AnimationUtils.loadAnimation(MainActivity.this,R.anim.fade_in);
 
-
-
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="http://www.google.com";
 
 
+        // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -85,7 +76,13 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
             }
         });
 
+// Add the request to the RequestQueue.
         queue.add(stringRequest);
+
+
+
+
+
 
 
 
