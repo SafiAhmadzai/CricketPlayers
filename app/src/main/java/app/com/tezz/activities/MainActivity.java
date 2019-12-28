@@ -2,16 +2,24 @@ package app.com.tezz.activities;
 
 import android.os.Bundle;
 
+import com.android.volley.ClientError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.reflect.TypeToken;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.View;
@@ -22,8 +30,19 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
 import app.com.tezz.R;
+import app.com.tezz.adapters.CelebrityAdapter;
 import app.com.tezz.application.Application;
+import app.com.tezz.models.Celebrity;
+import app.com.tezz.network.VolleySingleton;
 import app.com.tezz.receivers.ConnectivityReceiver;
 import app.com.tezz.utilities.SessionManager;
 
@@ -31,9 +50,14 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
 
 
     SessionManager sessionManager;
-    TextView textView;
-
     Animation animation;
+
+    RecyclerView rvDataCelebrities;
+    List<Celebrity> list;
+
+    CelebrityAdapter celebrityAdapter;
+    LinearLayoutManager manager;
+    String url="https://api.androidhive.info/json/contacts.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,93 +67,60 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        sessionManager=new SessionManager(MainActivity.this);
+
+        list=new ArrayList<>();
+        rvDataCelebrities=findViewById(R.id.rvData);
+        getAllCelebrityData();
 
 
-
-        if (getIntent().getStringExtra("key")!=null){
-
-
-            ///SHow tutorial
-        }
-
-        textView=findViewById(R.id.tvShowNetworkData);
+         manager=new LinearLayoutManager(MainActivity.this,LinearLayoutManager.VERTICAL,false);
 
 
-        animation= AnimationUtils.loadAnimation(MainActivity.this,R.anim.fade_in);
+    }
 
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://www.google.com";
+    private void getAllCelebrityData() {
 
-
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
+        JsonArrayRequest request = new JsonArrayRequest(url,
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        textView.setText("Response is: "+ response.substring(0,500));
+                    public void onResponse(JSONArray response) {
+                        if (response == null) {
+                            Toast.makeText(getApplicationContext(), "Couldn't fetch the contacts! Pleas try again.", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                        List<Celebrity> items = new Gson().fromJson(response.toString(), new TypeToken<List<Celebrity>>() {
+                        }.getType());
+
+
+                        Log.d("data",response.toString());
+
+                        list.clear();
+                        list.addAll(items);
+
+                        Log.d("data",list.size()+"");
+
+                        celebrityAdapter=new CelebrityAdapter(list,MainActivity.this);
+
+                        rvDataCelebrities.setLayoutManager(manager);
+                        rvDataCelebrities.setAdapter(celebrityAdapter);
+
+
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                textView.setText("That didn't work!");
+                // error in getting json
+                Toast.makeText(getApplicationContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
-// Add the request to the RequestQueue.
-        queue.add(stringRequest);
-
-
-
-
-
-
-
-
-        sessionManager=new SessionManager(MainActivity.this);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //sessionManager.setHighScore(25);
-
-
-                boolean  isConnected=ConnectivityReceiver.isConnected();
-
-
-                Toast.makeText(MainActivity.this, ""+isConnected, Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-
-
-        Log.d("data",sessionManager.getHighScore()+"");
+        VolleySingleton.getInstance().getRequestQueue().add(request);
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     protected void onResume() {

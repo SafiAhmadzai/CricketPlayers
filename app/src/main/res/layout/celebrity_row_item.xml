@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:layout_margin="16dp"
+        android:id="@+id/ivphotoCelbrity"
+        android:layout_width="@dimen/sizePhot"
+        android:layout_height="@dimen/sizePhot"
+        ></ImageView>
+
+    <TextView
+        android:layout_margin="16dp"
+        android:id="@+id/tvNameCelebrity"
+        android:layout_toRightOf="@+id/ivphotoCelbrity"
+        android:text="Malik Faisal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></TextView>
+
+
+    <TextView
+        android:id="@+id/tvPhoneCelebrity"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/tvNameCelebrity"
+        android:layout_toRightOf="@+id/ivphotoCelbrity"
+        android:text="0893111323232"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></TextView>
+
+
+</RelativeLayout>
