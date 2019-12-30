@@ -1,5 +1,6 @@
 package app.com.tezz.activities;
 
+import android.app.job.JobScheduler;
 import android.os.Bundle;
 
 import com.android.volley.ClientError;
@@ -8,12 +9,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -69,8 +72,11 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
 
         sessionManager=new SessionManager(MainActivity.this);
 
+
         list=new ArrayList<>();
         rvDataCelebrities=findViewById(R.id.rvData);
+
+        //to get data
         getAllCelebrityData();
 
 
@@ -119,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
         VolleySingleton.getInstance().getRequestQueue().add(request);
 
     }
+
 
 
 
