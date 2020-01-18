@@ -104,7 +104,7 @@ public class OnBoardingFlowActivity extends AppCompatActivity {
     }
 
     private void launchMainActivity() {
-        Intent intent=new Intent(OnBoardingFlowActivity.this,RegisterPage.class);
+        Intent intent=new Intent(OnBoardingFlowActivity.this,RegisterWithPhoneActivity.class);
         startActivity(intent);
         finish();
     }

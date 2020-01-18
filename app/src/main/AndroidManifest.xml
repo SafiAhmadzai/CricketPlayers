@@ -4,7 +4,7 @@
     package="app.com.tezz">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <dist:module dist:instant="true" />
 
@@ -16,19 +16,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.SensorDetectionActivity">
-
-        </activity>
+        <activity android:name=".activities.VerficationOTPActivity"></activity>
+        <activity android:name=".activities.RegisterWithPhoneActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.SensorDetectionActivity" />
         <activity
             android:name=".activities.ActivityWeb"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.RegisterPage"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-        <activity android:name=".activities.OnBoardingFlowActivity" >
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.OnBoardingFlowActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,11 +35,7 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
-
-
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <receiver
             android:name=".receivers.ConnectivityReceiver"
@@ -53,7 +46,7 @@
         </receiver>
         <receiver android:name=".receivers.MyPhoneReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.PHONE_STATE"></action>
+                <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
         </receiver>
     </application>
