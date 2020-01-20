@@ -122,5 +122,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPhoneNumber" />
 
+    <TextView
+        android:id="@+id/tvGuestUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Guest user"
+        android:textSize="17sp"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.753"
+        app:layout_constraintStart_toEndOf="@+id/tvFeedback"
+        app:layout_constraintTop_toBottomOf="@+id/etPhoneNumber" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

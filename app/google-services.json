@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:747567385848:android:fad3519ab0bbd751697f0d",
+        "mobilesdk_app_id": "1:747567385848:android:2ff807a6180bf70d697f0d",
         "android_client_info": {
           "package_name": "app.com.tezz"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "747567385848-8sou3sm9b2v3mfru8ph43bckqk87m9oq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.com.tezz",
+            "certificate_hash": "2d359df4b9b97ecdfcdd5d901d5c08b4fc11b392"
+          }
+        },
         {
           "client_id": "747567385848-alnlj4t59o4fdpttdl6t84amhvjnhv68.apps.googleusercontent.com",
           "client_type": 3

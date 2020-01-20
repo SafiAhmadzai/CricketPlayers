@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +30,8 @@ import app.com.tezz.R;
 
 public class RegisterWithPhoneActivity extends AppCompatActivity {
 
+public static final String TAG=RegisterWithPhoneActivity.class.getSimpleName();
+
 
     FirebaseAuth mAuth;
 
@@ -41,6 +45,7 @@ public class RegisterWithPhoneActivity extends AppCompatActivity {
 
     TextView tvFeedback;
 
+    TextView tvGuestUser;
 
 
 
@@ -60,6 +65,8 @@ public class RegisterWithPhoneActivity extends AppCompatActivity {
         currentUser=mAuth.getCurrentUser();
 
 
+        tvGuestUser=findViewById(R.id.tvGuestUser);
+
 
         etCountryCode=findViewById(R.id.etCountryCode);
         etPhoneNumber=findViewById(R.id.etPhoneNumber);
@@ -69,6 +76,16 @@ public class RegisterWithPhoneActivity extends AppCompatActivity {
 
 
 
+
+
+
+        tvGuestUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                guestUserSigning();
+            }
+        });
 
 
 
@@ -134,6 +151,8 @@ public class RegisterWithPhoneActivity extends AppCompatActivity {
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
 
+            Log.d(TAG, "onVerificationFailed: "+e);
+
             tvFeedback.setText("Failed Please Try Again!");
             tvFeedback.setVisibility(View.VISIBLE);
             btnCOntinue.setEnabled(true);
@@ -164,8 +183,29 @@ public class RegisterWithPhoneActivity extends AppCompatActivity {
 
     }
 
+    private void guestUserSigning() {
 
 
+        mAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+
+                if (task.isSuccessful()){
+
+                    goToMainActivity();
+
+
+                }else {
+
+                    Toast.makeText(RegisterWithPhoneActivity.this, "Failed Sign In", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+
+        });
+    }
 
 
     private boolean validation(String countryCode, String phoneNumber) {

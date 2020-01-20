@@ -12,13 +12,18 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,7 +44,9 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import app.com.tezz.R;
 import app.com.tezz.adapters.CelebrityAdapter;
@@ -52,6 +59,9 @@ import app.com.tezz.utilities.SessionManager;
 public class MainActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListerener {
 
 
+    public static final  String TAG=MainActivity.class.getSimpleName();
+
+
     SessionManager sessionManager;
     Animation animation;
 
@@ -61,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
     CelebrityAdapter celebrityAdapter;
     LinearLayoutManager manager;
     String url="https://api.androidhive.info/json/contacts.json";
+
+    FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +84,40 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
 
         sessionManager=new SessionManager(MainActivity.this);
 
+        floatingActionButton=findViewById(R.id.fab);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Access a Cloud Firestore instance from your Activity
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+                // Create a new user with a first and last name
+                Map<String, Object> user = new HashMap<>();
+                user.put("first", "Rafaat");
+                user.put("last", "Sultan");
+                user.put("born", 1992);
+
+// Add a new document with a generated ID
+                db.collection("users")
+                        .add(user)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error adding document", e);
+                            }
+                        });
+
+            }
+        });
 
         list=new ArrayList<>();
         rvDataCelebrities=findViewById(R.id.rvData);
