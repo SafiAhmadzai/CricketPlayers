@@ -16,8 +16,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.VerficationOTPActivity"></activity>
-        <activity android:name=".activities.RegisterWithPhoneActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.MainFoodsActivity"></activity>
+        <activity android:name=".activities.VerficationOTPActivity" />
+        <activity
+            android:name=".activities.RegisterWithPhoneActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.SensorDetectionActivity" />
         <activity
             android:name=".activities.ActivityWeb"
