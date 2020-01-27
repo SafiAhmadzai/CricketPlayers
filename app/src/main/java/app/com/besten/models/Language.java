@@ -1,6 +1,6 @@
 package app.com.besten.models;
 
-public class Language {
+public class Language implements Comparable<Language> {
     private String name;
     private Integer rank;
     private String content;
@@ -22,5 +22,13 @@ public class Language {
 
     public String getIcon() {
         return icon;
+    }
+
+    @Override
+    public int compareTo(Language language) {
+        if (getRank() == null || language.getRank() == null) {
+            return 0;
+        }
+        return getRank().compareTo(language.getRank());
     }
 }

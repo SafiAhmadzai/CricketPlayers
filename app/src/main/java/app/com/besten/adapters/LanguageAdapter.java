@@ -57,8 +57,8 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Langua
         Language language = list.get(position);
 
 
-        holder.tvPhone.setText(language.getRank().toString());
-        holder.tvName.setText(language.getName());
+        holder.tvPhone.setText("Ranking: " + language.getRank().toString());
+        holder.tvName.setText(language.getName().toUpperCase());
 
 
         Glide

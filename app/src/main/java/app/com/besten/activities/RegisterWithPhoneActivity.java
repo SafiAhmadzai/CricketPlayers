@@ -28,7 +28,7 @@ import app.com.besten.R;
 
 public class RegisterWithPhoneActivity extends AppCompatActivity {
 
-public static final String TAG=RegisterWithPhoneActivity.class.getSimpleName();
+    public static final String TAG = RegisterWithPhoneActivity.class.getSimpleName();
 
 
     FirebaseAuth mAuth;
@@ -37,7 +37,7 @@ public static final String TAG=RegisterWithPhoneActivity.class.getSimpleName();
 
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
 
-    EditText etCountryCode,etPhoneNumber;
+    EditText etCountryCode, etPhoneNumber;
 
     ProgressBar progressBar;
 
@@ -46,10 +46,7 @@ public static final String TAG=RegisterWithPhoneActivity.class.getSimpleName();
     TextView tvGuestUser;
 
 
-
     Button btnCOntinue;
-
-
 
 
     @Override
@@ -58,23 +55,19 @@ public static final String TAG=RegisterWithPhoneActivity.class.getSimpleName();
         setContentView(R.layout.activity_register_with_phone);
 
 
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
-        currentUser=mAuth.getCurrentUser();
-
-
-        tvGuestUser=findViewById(R.id.tvGuestUser);
+        currentUser = mAuth.getCurrentUser();
 
 
-        etCountryCode=findViewById(R.id.etCountryCode);
-        etPhoneNumber=findViewById(R.id.etPhoneNumber);
-
-        progressBar=findViewById(R.id.login_progress_bar);
-        tvFeedback=findViewById(R.id.tvFeedback);
+        tvGuestUser = findViewById(R.id.tvGuestUser);
 
 
+        etCountryCode = findViewById(R.id.etCountryCode);
+        etPhoneNumber = findViewById(R.id.etPhoneNumber);
 
-
+        progressBar = findViewById(R.id.login_progress_bar);
+        tvFeedback = findViewById(R.id.tvFeedback);
 
 
         tvGuestUser.setOnClickListener(new View.OnClickListener() {
@@ -86,99 +79,95 @@ public static final String TAG=RegisterWithPhoneActivity.class.getSimpleName();
         });
 
 
+        btnCOntinue = findViewById(R.id.btnContinue);
 
-        btnCOntinue=findViewById(R.id.btnContinue);
+        btnCOntinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-         btnCOntinue.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
+                String countryCode = etCountryCode.getText().toString();
+                String phoneNumber = etPhoneNumber.getText().toString();
 
-                 String countryCode=etCountryCode.getText().toString();
-                 String phoneNumber=etPhoneNumber.getText().toString();
+                String completeNumber = "+" + countryCode + phoneNumber;
+                Toast.makeText(RegisterWithPhoneActivity.this, "Number: " + completeNumber, Toast.LENGTH_SHORT).show();
 
-                 String completeNumber="+"+countryCode+phoneNumber;
-                 Toast.makeText(RegisterWithPhoneActivity.this, "Number: " + completeNumber, Toast.LENGTH_SHORT).show();
+                if (validation(countryCode, phoneNumber)) {
 
-                 if(validation(countryCode,phoneNumber)){
+                    btnCOntinue.setEnabled(false);
 
-                     btnCOntinue.setEnabled(false);
-
-                     progressBar.setVisibility(View.VISIBLE);
-
-
-                     PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                             completeNumber,        // Phone number to verify
-                             60,                 // Timeout duration
-                             TimeUnit.SECONDS,   // Unit of timeout
-                             RegisterWithPhoneActivity.this,               // Activity (for callback binding)
-                             mCallbacks);        // OnVerificationStateChangedCallbacks
+                    progressBar.setVisibility(View.VISIBLE);
 
 
-                 }
-
-
-
-             }
-         });
-    mCallbacks=new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-        @Override
-        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-
-
-            mAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(RegisterWithPhoneActivity.this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-
-                    if (task.isSuccessful()){
-                        goToMainActivity();
-                    }
-                    else {
-
-                        tvFeedback.setText("Oh Sorry a problem occured while sending otp");
-
-                    }
-
-                    progressBar.setVisibility(View.INVISIBLE);
-                    btnCOntinue.setEnabled(true);
+                    PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                            completeNumber,        // Phone number to verify
+                            60,                 // Timeout duration
+                            TimeUnit.SECONDS,   // Unit of timeout
+                            RegisterWithPhoneActivity.this,               // Activity (for callback binding)
+                            mCallbacks);        // OnVerificationStateChangedCallbacks
 
 
                 }
-            });
-
-        }
-
-        @Override
-        public void onVerificationFailed(@NonNull FirebaseException e) {
-
-            Log.d(TAG, "onVerificationFailed: "+e);
-
-            tvFeedback.setText("Failed Please Try Again!");
-            tvFeedback.setVisibility(View.VISIBLE);
-            btnCOntinue.setEnabled(true);
-            progressBar.setVisibility(View.INVISIBLE);
-
-        }
-
-        @Override
-        public void onCodeSent(@NonNull final String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            super.onCodeSent(s, forceResendingToken);
 
 
-            new android.os.Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent=new Intent(RegisterWithPhoneActivity.this,VerficationOTPActivity.class);
-                    intent.putExtra("AuthCredintials",s);
-                    startActivity(intent);
+            }
+        });
 
-                }
-            },10000);
+        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            @Override
+            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 
 
+                mAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(RegisterWithPhoneActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (task.isSuccessful()) {
+                            goToMainActivity();
+                        } else {
+
+                            tvFeedback.setText("Oh Sorry a problem occurred while sending otp");
+
+                        }
+
+                        progressBar.setVisibility(View.INVISIBLE);
+                        btnCOntinue.setEnabled(true);
 
 
-        }
-    };
+                    }
+                });
+
+            }
+
+            @Override
+            public void onVerificationFailed(@NonNull FirebaseException e) {
+
+                Log.d(TAG, "onVerificationFailed: " + e);
+
+                tvFeedback.setText("Failed Please Try Again!");
+                tvFeedback.setVisibility(View.VISIBLE);
+                btnCOntinue.setEnabled(true);
+                progressBar.setVisibility(View.INVISIBLE);
+
+            }
+
+            @Override
+            public void onCodeSent(@NonNull final String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                super.onCodeSent(s, forceResendingToken);
+
+
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(RegisterWithPhoneActivity.this, VerficationOTPActivity.class);
+                        intent.putExtra("AuthCredintials", s);
+                        startActivity(intent);
+
+                    }
+                }, 10000);
+
+
+            }
+        };
 
     }
 
@@ -190,12 +179,12 @@ public static final String TAG=RegisterWithPhoneActivity.class.getSimpleName();
             public void onComplete(@NonNull Task<AuthResult> task) {
 
 
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
 
                     goToMainActivity();
 
 
-                }else {
+                } else {
 
                     Toast.makeText(RegisterWithPhoneActivity.this, "Failed Sign In", Toast.LENGTH_SHORT).show();
                 }
@@ -209,20 +198,19 @@ public static final String TAG=RegisterWithPhoneActivity.class.getSimpleName();
 
     private boolean validation(String countryCode, String phoneNumber) {
 
-        if (countryCode.isEmpty() || phoneNumber.isEmpty()){
+        if (countryCode.isEmpty() || phoneNumber.isEmpty()) {
 
             tvFeedback.setText("Please enter phoneNumber and Country Code");
             tvFeedback.setVisibility(View.VISIBLE);
             return false;
-        }
-        else
+        } else
             return true;
     }
 
     private void goToMainActivity() {
 
 
-        Intent intent=new Intent(RegisterWithPhoneActivity.this,MainActivity.class);
+        Intent intent = new Intent(RegisterWithPhoneActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
 
@@ -235,7 +223,7 @@ public static final String TAG=RegisterWithPhoneActivity.class.getSimpleName();
         super.onStart();
 
 
-        if (currentUser!=null){
+        if (currentUser != null) {
             goToMainActivity();
 
         }

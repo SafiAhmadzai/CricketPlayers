@@ -29,6 +29,8 @@ import android.widget.Toast;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import app.com.besten.R;
@@ -68,19 +70,6 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
 
         sessionManager=new SessionManager(MainActivity.this);
 
-        floatingActionButton=findViewById(R.id.fab);
-
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // Access a Cloud Firestore instance from your Activity
-
-
-
-            }
-        });
-
         list=new ArrayList<>();
         rvDataLanguages=findViewById(R.id.rvData);
 
@@ -104,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
                 if(task.isSuccessful()) {
 
                     List<Language> languages = task.getResult().toObjects(Language.class);
+                    Collections.sort(languages);
+
                     languageAdapter=new LanguageAdapter(languages,MainActivity.this, new LanguageAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(Language item) {
