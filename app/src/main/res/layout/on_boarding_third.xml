@@ -16,14 +16,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="noodles.json"
+        app:lottie_fileName="prg3.json"
         app:lottie_loop="true" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Deliver food in seconds"
+        android:textAlignment="center"
+        android:text="With coding, top the world"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

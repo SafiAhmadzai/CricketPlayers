@@ -16,15 +16,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="cooking.json"
+        app:lottie_fileName="prg2.json"
         app:lottie_loop="true" />
 
     <TextView
         android:textStyle="bold"
         android:textSize="34sp"
+        android:textAlignment="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Deliver food in seconds"
+        android:text="Programming gives you better hiring chances"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageView2"

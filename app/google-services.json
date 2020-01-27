@@ -1,42 +1,63 @@
 {
   "project_info": {
-    "project_number": "747567385848",
-    "firebase_url": "https://tezz-4fd5d.firebaseio.com",
-    "project_id": "tezz-4fd5d",
-    "storage_bucket": "tezz-4fd5d.appspot.com"
+    "project_number": "743671246128",
+    "firebase_url": "https://expensetracker-7e5f0.firebaseio.com",
+    "project_id": "expensetracker-7e5f0",
+    "storage_bucket": "expensetracker-7e5f0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:747567385848:android:2ff807a6180bf70d697f0d",
+        "mobilesdk_app_id": "1:743671246128:android:4a6b8b60475b68f5e5ecf5",
         "android_client_info": {
-          "package_name": "app.com.tezz"
+          "package_name": "app.com.besten"
         }
       },
       "oauth_client": [
         {
-          "client_id": "747567385848-8sou3sm9b2v3mfru8ph43bckqk87m9oq.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "app.com.tezz",
-            "certificate_hash": "2d359df4b9b97ecdfcdd5d901d5c08b4fc11b392"
-          }
-        },
-        {
-          "client_id": "747567385848-alnlj4t59o4fdpttdl6t84amhvjnhv68.apps.googleusercontent.com",
+          "client_id": "743671246128-d6dic2uq462at8la7o0dkquffl28at44.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBL_8ZIbOc4UKtcaeAYq8BAj9Yjfn4IXEk"
+          "current_key": "AIzaSyDvkkB4ybttIr6QoGMjt4CRHN1587A49_o"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "747567385848-alnlj4t59o4fdpttdl6t84amhvjnhv68.apps.googleusercontent.com",
+              "client_id": "743671246128-d6dic2uq462at8la7o0dkquffl28at44.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743671246128:android:04f3fee123e2d01ee5ecf5",
+        "android_client_info": {
+          "package_name": "com.example.expensetracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "743671246128-d6dic2uq462at8la7o0dkquffl28at44.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvkkB4ybttIr6QoGMjt4CRHN1587A49_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "743671246128-d6dic2uq462at8la7o0dkquffl28at44.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

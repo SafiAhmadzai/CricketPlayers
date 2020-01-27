@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="app.com.tezz">
+    package="app.com.besten">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -9,26 +9,26 @@
     <dist:module dist:instant="true" />
 
     <application
-        android:name=".application.Application"
+        android:name="app.com.besten.application.Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainFoodsActivity"></activity>
-        <activity android:name=".activities.VerficationOTPActivity" />
+        <activity android:name="app.com.besten.activities.MainFoodsActivity"></activity>
+        <activity android:name="app.com.besten.activities.VerficationOTPActivity" />
         <activity
-            android:name=".activities.RegisterWithPhoneActivity"
+            android:name="app.com.besten.activities.RegisterWithPhoneActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.SensorDetectionActivity" />
+        <activity android:name="app.com.besten.activities.SensorDetectionActivity" />
         <activity
-            android:name=".activities.ActivityWeb"
+            android:name="app.com.besten.activities.ActivityWeb"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.RegisterPage"
+            android:name="app.com.besten.activities.RegisterPage"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.OnBoardingFlowActivity">
+        <activity android:name="app.com.besten.activities.OnBoardingFlowActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,18 +36,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name="app.com.besten.activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <receiver
-            android:name=".receivers.ConnectivityReceiver"
+            android:name="app.com.besten.receivers.ConnectivityReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".receivers.MyPhoneReceiver">
+        <receiver android:name="app.com.besten.receivers.MyPhoneReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
