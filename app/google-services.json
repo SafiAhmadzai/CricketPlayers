@@ -1,63 +1,42 @@
 {
   "project_info": {
-    "project_number": "743671246128",
-    "firebase_url": "https://expensetracker-7e5f0.firebaseio.com",
-    "project_id": "expensetracker-7e5f0",
-    "storage_bucket": "expensetracker-7e5f0.appspot.com"
+    "project_number": "134274292087",
+    "firebase_url": "https://topcricketplayer.firebaseio.com",
+    "project_id": "topcricketplayer",
+    "storage_bucket": "topcricketplayer.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:743671246128:android:4a6b8b60475b68f5e5ecf5",
+        "mobilesdk_app_id": "1:134274292087:android:1a872fe416488d9f0ba972",
         "android_client_info": {
-          "package_name": "app.com.besten"
+          "package_name": "com.example.topcricketplayer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "743671246128-d6dic2uq462at8la7o0dkquffl28at44.apps.googleusercontent.com",
+          "client_id": "134274292087-ndm5dfmqcmv0nlv3ca7salb54thtr5g0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.topcricketplayer",
+            "certificate_hash": "aca06e211eab311646631a17d18e54633fd62612"
+          }
+        },
+        {
+          "client_id": "134274292087-e0hn461dc61jqc6495bm4v9n6ear9644.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDvkkB4ybttIr6QoGMjt4CRHN1587A49_o"
+          "current_key": "AIzaSyC9RZtFiR4iSc5LJdtRh2dbcY7dJP76USU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "743671246128-d6dic2uq462at8la7o0dkquffl28at44.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:743671246128:android:04f3fee123e2d01ee5ecf5",
-        "android_client_info": {
-          "package_name": "com.example.expensetracker"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "743671246128-d6dic2uq462at8la7o0dkquffl28at44.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDvkkB4ybttIr6QoGMjt4CRHN1587A49_o"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "743671246128-d6dic2uq462at8la7o0dkquffl28at44.apps.googleusercontent.com",
+              "client_id": "134274292087-e0hn461dc61jqc6495bm4v9n6ear9644.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
